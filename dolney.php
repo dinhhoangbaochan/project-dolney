@@ -11,30 +11,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'ELEMENTOR_VERSION', '0.0.1' );
+define( 'DOLNEY_VERSION', '0.0.1' );
 
-define( 'ELEMENTOR__FILE__', __FILE__ ); // this point to this dolney.php file
-define( 'ELEMENTOR_PLUGIN_BASE', plugin_basename( ELEMENTOR__FILE__ ) );
-define( 'ELEMENTOR_PATH', plugin_dir_path( ELEMENTOR__FILE__ ) ); // this returns the path to plugin directory
+define( 'DOLNEY__FILE__', __FILE__ ); // this point to this dolney.php file
+define( 'DOLNEY_PLUGIN_BASE', plugin_basename( DOLNEY__FILE__ ) );
+define( 'DOLNEY_PATH', plugin_dir_path( DOLNEY__FILE__ ) ); // this returns the path to plugin directory
 
-if ( defined( 'ELEMENTOR_TESTS' ) && ELEMENTOR_TESTS ) {
-	define( 'ELEMENTOR_URL', 'file://' . ELEMENTOR_PATH );
+if ( defined( 'DOLNEY_TESTS' ) && DOLNEY_TESTS ) {
+	define( 'DOLNEY_URL', 'file://' . DOLNEY_PATH );
 } else {
-	define( 'ELEMENTOR_URL', plugins_url( '/', ELEMENTOR__FILE__ ) );
+	define( 'DOLNEY_URL', plugins_url( '/', DOLNEY__FILE__ ) );
 }
 
-define( 'ELEMENTOR_MODULES_PATH', plugin_dir_path( ELEMENTOR__FILE__ ) . '/modules' );
-define( 'ELEMENTOR_ASSETS_PATH', ELEMENTOR_PATH . 'assets/' );
-define( 'ELEMENTOR_ASSETS_URL', ELEMENTOR_URL . 'assets/' );
+define( 'DOLNEY_MODULES_PATH', plugin_dir_path( DOLNEY__FILE__ ) . '/modules' );
+define( 'DOLNEY_ASSETS_PATH', DOLNEY_PATH . 'assets/' );
+define( 'DOLNEY_ASSETS_URL', DOLNEY_URL . 'assets/' );
 
 // Display notice if PHP is lower than 7.4 or WordPress is not 6.0
 if ( ! version_compare( PHP_VERSION, '7.4', '>=' ) ) {
-	add_action( 'admin_notices', 'elementor_fail_php_version' );
+	add_action( 'admin_notices', 'DOLNEY_fail_php_version' );
 } elseif ( ! version_compare( get_bloginfo( 'version' ), '6.0', '>=' ) ) {
-	add_action( 'admin_notices', 'elementor_fail_wp_version' );
+	add_action( 'admin_notices', 'DOLNEY_fail_wp_version' );
 } else {
   // Otherwise, call plugin.php in includes
-	require ELEMENTOR_PATH . 'includes/plugin.php';
+	require DOLNEY_PATH . 'includes/plugin.php';
 }
 
 /**
@@ -46,7 +46,7 @@ if ( ! version_compare( PHP_VERSION, '7.4', '>=' ) ) {
  *
  * @return void
  */
-function elementor_fail_php_version() {
+function DOLNEY_fail_php_version() {
 	$html_message = sprintf(
 		'<div class="error"><h3>%1$s</h3><p>%2$s <a href="https://go.elementor.com/wp-dash-update-php/" target="_blank">%3$s</a></p></div>',
 		esc_html__( 'Elementor isn’t running because PHP is outdated.', 'elementor' ),
@@ -70,7 +70,7 @@ function elementor_fail_php_version() {
  *
  * @return void
  */
-function elementor_fail_wp_version() {
+function DOLNEY_fail_wp_version() {
 	$html_message = sprintf(
 		'<div class="error"><h3>%1$s</h3><p>%2$s <a href="https://go.elementor.com/wp-dash-update-wordpress/" target="_blank">%3$s</a></p></div>',
 		esc_html__( 'Elementor isn’t running because WordPress is outdated.', 'elementor' ),
